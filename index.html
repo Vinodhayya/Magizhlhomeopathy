@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Magizhl Homeopathy Clinic & Pharmacy</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --green-800:#27684f;
+      --green-600:#3b8a68;
+      --green-400:#7fbf96;
+      --accent-yellow:#f2b200;
+      --soft-bg:#fbf9f1;
+      --card-bg:#ffffff;
+      --muted:#6b7280;
+      --radius:14px;
+      --watermark-url: url('images/logo.png'); /* may be updated by JS */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--green-800);
+      background: linear-gradient(180deg, #f7fbf5 0%, var(--soft-bg) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    /* watermark background (CSS var updated by JS if image found) */
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: var(--watermark-url);
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: 400px;
+      opacity: 0.06;
+      z-index: -1;
+      filter: hue-rotate(190deg) saturate(1.5);
+      pointer-events: none;
+    }
+
+    .container{max-width:1100px;margin:28px auto;padding:20px;}
+
+    /* Header / Nav */
+    header{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      justify-content:space-between;
+      margin-bottom:18px;
+      flex-wrap:nowrap;
+    }
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .logo{
+      width:72px;height:72px;border-radius:12px;display:inline-grid;place-items:center;
+      background: linear-gradient(180deg,var(--green-400),#e8f5ea);
+      box-shadow: 0 6px 18px rgba(39,104,79,0.08);
+      flex-shrink:0;
+    }
+    .logo img{width:60px;height:auto;display:block}
+    .brand h1{margin:0;font-size:20px;font-family:'Playfair Display',serif;letter-spacing:0.2px;color:var(--green-800);}
+    .brand p{margin:0;font-size:12px;color:var(--muted);}
+
+    nav{
+      display:flex;gap:8px;align-items:center;
+      /* ensure nav fits and Home isn't misplaced */
+      min-width:220px;
+    }
+    .navlink{font-weight:600;padding:8px 12px;border-radius:10px;color:var(--green-800);text-decoration:none;font-size:14px;}
+    .navlink:hover{background:rgba(59,138,104,0.08)}
+    .cta{
+      background:var(--green-600);color:white;padding:10px 14px;border-radius:12px;font-weight:600;display:inline-flex;align-items:center;gap:8px;text-decoration:none;box-shadow: 0 8px 24px rgba(59,138,104,0.12);cursor:pointer
+    }
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns: 1fr 420px;gap:22px;align-items:stretch;margin-top:8px;}
+    .hero-card{background:var(--card-bg);border-radius:var(--radius);padding:28px;box-shadow: 0 10px 30px rgba(39,104,79,0.06);}
+    .hero h2{margin:0 0 8px 0;font-family:'Playfair Display',serif;font-size:34px;color:var(--green-800);line-height:1.05;}
+    .hero p.lead{margin:8px 0 18px 0;color:var(--muted);font-size:16px;max-width:60ch;}
+
+    .features{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;}
+    .feature{background: linear-gradient(0deg, rgba(59,138,104,0.06), rgba(59,138,104,0.02));padding:10px 12px;border-radius:12px;font-weight:600;color:var(--green-800);display:flex;gap:10px;align-items:center;font-size:14px;}
+
+    /* Side (kept but forms removed visually) */
+    .side{display:flex;flex-direction:column;gap:12px;}
+    .panel{border-radius:12px;padding:14px;background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(249,249,249,0.6));box-shadow: 0 8px 20px rgba(30,40,30,0.04);}
+    .panel h3{margin:0 0 8px 0;font-size:18px;color:var(--green-800)}
+    .muted{color:var(--muted);font-size:14px;margin-bottom:8px}
+
+    /* Forms / inputs */
+    form .field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px;}
+    input[type="text"], input[type="email"], input[type="date"], input[type="time"], textarea, select{padding:10px 12px;border-radius:10px;border:1px solid #e6ece3;background:transparent;font-size:15px;color:var(--green-800);outline:none;}
+    textarea{min-height:100px;resize:vertical;padding-top:10px}
+    label{font-size:13px;color:var(--muted)}
+    /* classic light orange dropdown */
+    select{background:#fff8f0;border:1px solid #f4c17a;}
+
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;cursor:pointer;border:0;font-weight:700;}
+    .btn-primary{background:var(--green-600);color:#fff;box-shadow: 0 8px 20px rgba(59,138,104,0.12);}
+    .btn-outline{background:transparent;border:1px solid rgba(39,104,79,0.08);color:var(--green-800);}
+
+    /* Treatments section (Flipkart-like icon gradient & lift) */
+    .treatments{display:grid;grid-template-columns: repeat(2,1fr);gap:14px;margin-top:18px;}
+    .treat-card{background:linear-gradient(180deg,#fff, #fbfff7);padding:16px;border-radius:12px;box-shadow: 0 6px 18px rgba(39,104,79,0.04);display:flex;gap:12px;align-items:flex-start;transition:transform 0.15s;}
+    .treat-card:hover{transform:translateY(-4px);}
+    .icon{min-width:58px;min-height:58px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#2874f0,#f2b200);color:#fff;font-weight:700;font-size:22px;}
+    .treat-card h4{margin:0 0 6px 0}
+    .treat-card p{margin:0;color:var(--muted);font-size:14px}
+
+    /* Footer/contact */
+    footer{margin-top:26px;padding:18px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.6), rgba(245,250,245,0.8));display:flex;gap:18px;align-items:center;justify-content:space-between;}
+    .address{color:var(--muted);font-size:14px}
+    .phone{font-weight:700;color:var(--green-800);font-size:16px}
+
+    /* Modal */
+    .modal{display:none;position:fixed;z-index:10000;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;padding:16px}
+    .modal-card{background:#fff;padding:20px;border-radius:14px;max-width:540px;width:100%;box-shadow:0 10px 30px rgba(0,0,0,0.2);position:relative}
+
+    /* Chat float */
+    #chatbot-btn{position:fixed;bottom:20px;right:20px;background:var(--green-600);color:#fff;border:none;border-radius:50%;width:60px;height:60px;cursor:pointer;font-size:26px;box-shadow:0 6px 12px rgba(0,0,0,0.2);z-index:10001}
+    #chatPanel{display:none;position:fixed;bottom:90px;right:20px;width:320px;max-height:480px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.2);overflow:hidden;z-index:10001}
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;padding-bottom:8px}
+      .treatments{grid-template-columns:1fr}
+      header{flex-direction:column;align-items:stretch;gap:12px}
+      nav{justify-content:flex-end}
+      .brand { order: 0; }
+    }
+    @media (max-width:560px){
+      .logo{width:56px;height:56px}
+      .brand h1{font-size:18px}
+      .hero h2{font-size:28px}
+      .container{padding:14px}
+      #chatPanel{right:12px;left:12px;width:auto}
+    }
+
+    .muted-2{color:#98a089;font-size:13px}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:rgba(59,138,104,0.06);font-weight:600;color:var(--green-800)}
+    .small{font-size:13px}
+  </style>
+</head>
+<body>
+
+  <div class="container" role="main">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <!-- header logo: JS will try several filenames and set the src -->
+          <img id="headerLogo" src="images/logo.png" alt="Magizhl logo" onerror="this.style.display='none'">
+        </div>
+        <div>
+          <h1>Magizhl</h1>
+          <p>Homeopathy Clinic & Pharmacy — Pallikaranai, Chennai</p>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation">
+        <a class="navlink" href="#home">Home</a>
+        <a class="navlink" href="#treatments">Treatments</a>
+        <a class="navlink" href="#about">About</a>
+        <a class="navlink" href="#contact">Contact</a>
+        <a class="cta" href="javascript:void(0)" onclick="openModal()">Book Now
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" style="vertical-align:middle;margin-left:4px"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" id="home" aria-labelledby="hero-heading">
+      <div class="hero-card" style="display:flex;flex-direction:column;justify-content:space-between;">
+        <div>
+          <h2 id="hero-heading">Your Health, Our Care — Anytime, Anywhere</h2>
+          <p class="lead">Magizhl Homeopathy Clinic blends the wisdom of traditional homeopathy with modern convenience. We offer safe and effective online consultations, ensuring personalised care tailored to every individual. Our gentle approach focuses on holistic healing, supporting the health and well-being of children, adults, and people at every stage of life's.</p>
+
+          <div class="features" aria-hidden="true">
+            <div class="feature">🌿 100% Natural</div>
+            <div class="feature">⚡ Relief from Diseases with Homeopathy</div>
+            <div class="feature">💬 Online & in-clinic consultation</div>
+          </div>
+
+          <div style="margin-top:18px; display:flex; gap:10px; align-items:center;">
+            <a class="btn btn-primary" href="javascript:void(0)" onclick="openModal()" title="Book an appointment">Book Appointment</a>
+            <a class="btn btn-outline" href="javascript:void(0)" onclick="toggleChat()">Chat with Us</a>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="display:flex;gap:12px;align-items:center">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2c1.657 0 3 1.343 3 3 0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3z" fill="#3b8a68"/><path d="M5 22v-2c0-2.761 4.03-5 9-5s9 2.239 9 5v2H5z" fill="#7fbf96"/></svg>
+            <div>
+              <div class="small">Clinic</div>
+              <div class="muted-2">A12/5, Dilibabu Nagar, Pallikaranai</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 10v6a2 2 0 0 1-2 2h-3l-3 3v-3H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l3 3h3a2 2 0 0 1 2 2z" fill="#f2b200"/></svg>
+            <div>
+              <div class="small">Call / WhatsApp</div>
+              <div class="phone">+91 91767 20287</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Minimal aside (forms removed from visible homepage - use buttons to open) -->
+      <aside class="side" aria-label="Booking and chat panels">
+        <div class="panel" aria-hidden="true">
+          <h3>Book an Appointment</h3>
+          <p class="muted">Use the <strong>Book Appointment</strong> button above to open the appointment form.</p>
+        </div>
+
+        <div class="panel" aria-hidden="true">
+          <h3>Chat With Us</h3>
+          <p class="muted">Use the <strong>Chat with Us</strong> button above to open a chat window.</p>
+        </div>
+      </aside>
+    </section>
+
+    <!-- TREATMENTS -->
+    <section id="treatments" aria-labelledby="treatments-heading" style="margin-top:22px">
+      <h2 id="treatments-heading" style="font-family:'Playfair Display',serif;color:var(--green-800);font-size:26px;margin-bottom:10px">What diseases can be treated?</h2>
+
+      <div class="treatments" role="list">
+        <!-- Original icons preserved as in the PDF (emoji/glyphs) -->
+        <article class="treat-card" role="listitem">
+          <div class="icon">🌬</div>
+          <div>
+            <h4>Allergies & Asthma</h4>
+            <p>Personalized remedies to help manage respiratory allergies and asthma symptoms.</p>
+          </div>
+        </article>
+
+        <article class="treat-card" role="listitem">
+          <div class="icon">🦴</div>
+          <div>
+            <h4>Joint Pain & Arthritis</h4>
+            <p>Gentle approaches to address chronic joint pain and improve mobility.</p>
+          </div>
+        </article>
+
+        <article class="treat-card" role="listitem">
+          <div class="icon">🧴</div>
+          <div>
+            <h4>Skin Problems</h4>
+            <p>Eczema, psoriasis, acne — root-based homeopathic care for clearer skin.</p>
+          </div>
+        </article>
+
+        <article class="treat-card" role="listitem">
+          <div class="icon">🧠</div>
+          <div>
+            <h4>Anxiety & Depression</h4>
+            <p>Supportive, individualized remedies for emotional and mental wellness.</p>
+          </div>
+        </article>
+
+        <article class="treat-card" role="listitem">
+          <div class="icon">🤕</div>
+          <div>
+            <h4>Migraines & Headaches</h4>
+            <p>Natural approaches targeting the triggers and frequency of headaches.</p>
+          </div>
+        </article>
+
+        <article class="treat-card" role="listitem">
+          <div class="icon">🧒</div>
+          <div>
+            <h4>Child Health</h4>
+            <p>Teething, bedwetting, immunity support — safe and gentle remedies for kids.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ABOUT / DID YOU KNOW -->
+    <section id="about" style="margin-top:26px; display:flex; gap:18px; align-items:stretch; flex-wrap:wrap">
+      <div style="flex:1; min-width:280px; background:linear-gradient(180deg,#fff,#fbfff7); padding:20px; border-radius:12px; box-shadow:0 8px 20px rgba(39,104,79,0.04)">
+        <h3 style="margin-top:0;font-family:'Playfair Display',serif;color:var(--green-800)">Did you know?</h3>
+        <p class="muted">Homeopathy focuses on healing from within by addressing the root cause, not just the symptoms. At Magizhl Homeopathy Clinic, treatments are carefully tailored to each individual for safe and effective results. Our remedies are gentle, natural, and suitable for every stage of life. With online consultation and personalized guidance, we make holistic care accessible and convenient. Magizhl is committed to supporting your health journey with compassion and expertise.</p>
+
+        <div style="margin-top:12px">
+          <h4 style="margin:10px 0 6px 0">Clinic & Delivery</h4>
+          <p class="muted">At Magizhl Homeopathy Clinic, we combine trusted expertise with a personalized approach to healing. We offer convenient online consultations with experienced doctors and provide access to a complete range of homeopathic medicines. By treating the root cause with safe and gentle remedies, Magizhl ensures long-lasting relief and holistic wellness.All homeopathy medicines are available under one roof for your wellness needs.</p>
+        </div>
+      </div>
+
+      <div style="width:300px; min-width:260px; background:linear-gradient(180deg,#fff,#f8fff8); padding:18px; border-radius:12px; box-shadow:0 8px 20px rgba(39,104,79,0.03)">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <img id="sidebarLogo" src="images/logo-full.png" alt="Magizhl full logo" style="max-width:220px" onerror="this.style.display='none'">
+          <div class="muted">Magizhl Homeopathy Clinic & Pharmacy</div>
+          <div style="margin-top:10px; text-align:center">
+            <div class="small">A12/5 Dilibabu Nagar, 2nd Cross St,<br/>Sri Ambal Nagar, Pallikaranai, Chennai - 600100</div>
+            <div style="margin-top:10px">
+              <a class="pill" href="tel:+919176720287">📞 +91 91767 20287</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact" aria-labelledby="contact-heading">
+      <div>
+        <div id="contact-heading" style="font-weight:700;color:var(--green-800)">Visit / Contact</div>
+        <div class="address">A12/5 Dilibabu Nagar, 2nd Cross Street, Sri Ambal Nagar, Pallikaranai, Chennai - 600100</div>
+      </div>
+      <div style="text-align:right">
+        <div class="small muted">Open Monday - Saturday</div>
+        <div class="phone">+91 91767 20287</div>
+      </div>
+    </footer>
+
+    <div style="height:16px"></div>
+  </div>
+
+  <!-- MODAL: Modal container (form will be cloned from hidden original) -->
+  <div id="appointmentModal" class="modal" aria-hidden="true" role="dialog" aria-label="Appointment dialog">
+    <div class="modal-card" role="document" aria-modal="true">
+      <button type="button" aria-label="Close dialog" onclick="closeModal()" style="position:absolute;right:12px;top:12px;background:none;border:0;font-size:22px;cursor:pointer">×</button>
+      <div id="modalFormContainer">
+        <div style="padding:10px;color:var(--muted)">Loading form...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Chat Button + Panel (chat form cloned from hidden original) -->
+  <button id="chatbot-btn" aria-label="Open chat" title="Chat with us" onclick="toggleChat()">💬</button>
+
+  <div id="chatPanel" aria-hidden="true" role="dialog" aria-label="Chat panel">
+    <div style="background:#3b8a68;color:#fff;padding:12px;font-weight:700;display:flex;justify-content:space-between;align-items:center;">
+      <div>Chat with Us</div>
+      <button onclick="toggleChat()" aria-label="Close chat" style="background:none;border:0;color:#fff;font-size:20px;cursor:pointer">×</button>
+    </div>
+    <div id="chatFormContainer" style="padding:12px;overflow:auto;max-height:380px;">
+      <div style="color:var(--muted)">Loading chat form...</div>
+    </div>
+  </div>
+
+  <!-- HIDDEN: original forms preserved (unchanged) but hidden from the homepage view.
+       These are the exact original forms (IDs kept) — used as the 'source' when cloning into modal/panel.
+       This preserves original markup while keeping the homepage clean (buttons only).
+  -->
+  <div id="hiddenOriginalForms" style="display:none">
+    <!-- ORIGINAL APPOINTMENT FORM (kept exactly) -->
+    <form id="appointmentForm" onsubmit="return handleAppointment(event)">
+      <div class="field">
+        <label for="name">Full name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Email address</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" required>
+      </div>
+
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div style="flex:1" class="field">
+          <label for="date">Preferred date</label>
+          <input id="date" name="date" type="date" required>
+        </div>
+        <div style="width:140px" class="field">
+          <label for="time">Preferred time</label>
+          <input id="time" name="time" type="time">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Tell us briefly about your concern (optional)</label>
+        <textarea id="message" name="message" placeholder="Short note (symptoms, age, etc.)"></textarea>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-primary" type="submit">Send Appointment Request</button>
+        <button type="button" class="btn btn-outline" onclick="fillSample()">Try sample</button>
+      </div>
+    </form>
+
+    <!-- ORIGINAL CHAT FORM (kept exactly) -->
+    <form id="chatForm" onsubmit="return handleChat(event)">
+      <div class="field">
+        <label for="chatEmail">Your email</label>
+        <input id="chatEmail" name="chatEmail" type="email" placeholder="you@example.com" required>
+      </div>
+
+      <div class="field">
+        <label for="chatMessage">Message</label>
+        <textarea id="chatMessage" name="chatMessage" placeholder="Describe your question or issue" required></textarea>
+      </div>
+
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-primary" type="submit">Send Message</button>
+        <a class="btn btn-outline" href="tel:+919176720287" aria-label="Call clinic">Call us</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    /************************************************************************
+     * Replace the clinicEmail below with your real clinic email address.
+     * Example: const clinicEmail = 'appointments@magizhl.com'
+     ************************************************************************/
+    const clinicEmail = 'contact@magizhl.com'; // <-- change to your clinic email
+
+    // Utility: build mailto URL
+    function mailtoUrl(to, subject, body){
+      return 'mailto:' + encodeURIComponent(to)
+             + '?subject=' + encodeURIComponent(subject || '')
+             + '&body=' + encodeURIComponent(body || '');
+    }
+
+    // Original handlers (kept behavior)
+    function handleAppointment(e){
+      e.preventDefault();
+      const form = e.target;
+      // Works both for original form or cloned form because we use named controls
+      const name = (form.elements['name'] && form.elements['name'].value || '').trim();
+      const email = (form.elements['email'] && form.elements['email'].value || '').trim();
+      const date = (form.elements['date'] && form.elements['date'].value) || '';
+      const time = (form.elements['time'] && form.elements['time'].value) || 'Any';
+      const message = (form.elements['message'] && form.elements['message'].value.trim()) || 'No additional details';
+
+      if(!name || !email || !date){
+        alert('Please fill your name, email and preferred date.');
+        return false;
+      }
+
+      const subject = `Appointment request — ${name} (${date})`;
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Preferred date: ${date}`,
+        `Preferred time: ${time}`,
+        'Message:',
+        message,
+        '',
+        'Source: Website appointment form'
+      ].join('\\n');
+
+      // open mail client
+      window.location.href = mailtoUrl(clinicEmail, subject, body);
+      closeModal();
+      return false;
+    }
+
+    function handleChat(e){
+      e.preventDefault();
+      const form = e.target;
+      const email = (form.elements['chatEmail'] && form.elements['chatEmail'].value || '').trim();
+      const message = (form.elements['chatMessage'] && form.elements['chatMessage'].value.trim()) || '';
+
+      if(!email || !message){
+        alert('Please provide your email and message so we can contact you back.');
+        return false;
+      }
+
+      const subject = `Website chat message from ${email}`;
+      const body = [
+        `Email: ${email}`,
+        '',
+        'Message:',
+        message,
+        '',
+        'Source: Website chat form'
+      ].join('\\n');
+
+      window.location.href = mailtoUrl(clinicEmail, subject, body);
+      hideChat();
+      return false;
+    }
+
+    // sample fill for demo
+    function fillSample(){
+      // try both original (hidden) and modal forms
+      const nameEl = document.querySelector('[name="name"]');
+      const emailEl = document.querySelector('[name="email"]');
+      const dateEl = document.querySelector('[name="date"]');
+      const timeEl = document.querySelector('[name="time"]');
+      const msgEl = document.querySelector('[name="message"]');
+
+      if(nameEl) nameEl.value = 'Sakthi Kumar';
+      if(emailEl) emailEl.value = 'sakthi@example.com';
+      if(dateEl){
+        const tomorrow = new Date(Date.now() + 24*60*60*1000);
+        const yyyy = tomorrow.getFullYear();
+        const mm = String(tomorrow.getMonth()+1).padStart(2,'0');
+        const dd = String(tomorrow.getDate()).padStart(2,'0');
+        dateEl.value = `${yyyy}-${mm}-${dd}`;
+      }
+      if(timeEl) timeEl.value = '10:30';
+      if(msgEl) msgEl.value = 'I have recurring headaches and would like a consultation.';
+    }
+
+    // Modal open/close
+    function openModal(){
+      const m = document.getElementById('appointmentModal');
+      if(m){
+        m.style.display = 'flex';
+        m.setAttribute('aria-hidden','false');
+        cloneAppointmentFormToModal();
+      }
+    }
+    function closeModal(){
+      const m = document.getElementById('appointmentModal');
+      if(m){
+        m.style.display = 'none';
+        m.setAttribute('aria-hidden','true');
+      }
+    }
+
+    // Chat floating show/hide
+    function toggleChat(){
+      const p = document.getElementById('chatPanel');
+      if(p.style.display === 'block'){
+        hideChat();
+      } else {
+        showChat();
+      }
+    }
+    function showChat(){
+      const p = document.getElementById('chatPanel');
+      p.style.display = 'block';
+      p.setAttribute('aria-hidden','false');
+      cloneChatFormToPanel();
+    }
+    function hideChat(){
+      const p = document.getElementById('chatPanel');
+      p.style.display = 'none';
+      p.setAttribute('aria-hidden','true');
+    }
+
+    /**********************************************************
+     * Cloning: clone original forms (kept hidden in DOM) into
+     * the modal and the chat panel. Cloned IDs get "-modal"
+     * suffix to avoid duplicate id conflicts.
+     **********************************************************/
+    function cloneAppointmentFormToModal(){
+      try {
+        // source original (hidden)
+        const original = document.getElementById('appointmentForm');
+        const container = document.getElementById('modalFormContainer');
+        if(!original || !container) return;
+        // if already cloned, do nothing
+        if(document.getElementById('appointmentFormModal')) return;
+
+        const clone = original.cloneNode(true);
+        clone.id = 'appointmentFormModal';
+        // update all id attributes inside clone
+        const allWithId = clone.querySelectorAll('[id]');
+        allWithId.forEach(el=>{
+          const old = el.id;
+          el.id = old + '-modal';
+        });
+        // update label for attributes
+        const labels = clone.querySelectorAll('label[for]');
+        labels.forEach(l=>{
+          const fv = l.getAttribute('for');
+          if(fv) l.setAttribute('for', fv + '-modal');
+        });
+        // ensure event handler uses our handler
+        clone.addEventListener('submit', handleAppointment);
+        clone.removeAttribute('onsubmit');
+        container.innerHTML = '';
+        container.appendChild(clone);
+      } catch (err){
+        console.error('Error cloning appointment form:', err);
+      }
+    }
+
+    function cloneChatFormToPanel(){
+      try {
+        const original = document.getElementById('chatForm');
+        const container = document.getElementById('chatFormContainer');
+        if(!original || !container) return;
+        if(document.getElementById('chatFormModal')) return;
+
+        const clone = original.cloneNode(true);
+        clone.id = 'chatFormModal';
+        const allWithId = clone.querySelectorAll('[id]');
+        allWithId.forEach(el=>{
+          const old = el.id;
+          el.id = old + '-modal';
+        });
+        const labels = clone.querySelectorAll('label[for]');
+        labels.forEach(l=>{
+          const fv = l.getAttribute('for');
+          if(fv) l.setAttribute('for', fv + '-modal');
+        });
+        clone.addEventListener('submit', handleChat);
+        clone.removeAttribute('onsubmit');
+        container.innerHTML = '';
+        container.appendChild(clone);
+      } catch (err){
+        console.error('Error cloning chat form:', err);
+      }
+    }
+
+    // Try multiple likely logo paths; pick the first that loads.
+    (function detectAndSetLogo(){
+      const candidates = [
+        'images/logo.png',
+        'logo.png',
+        'images/logo-full.png',
+        'logo-full.png',
+        'images/logo.svg',
+        'logo.svg'
+      ];
+      let i = 0;
+      function tryNext(){
+        if(i >= candidates.length){
+          return;
+        }
+        const path = candidates[i++];
+        const img = new Image();
+        img.onload = function(){
+          const headerLogo = document.getElementById('headerLogo');
+          const sidebarLogo = document.getElementById('sidebarLogo');
+          if(headerLogo){ headerLogo.src = path; headerLogo.style.display='block'; }
+          if(sidebarLogo){ sidebarLogo.src = path; sidebarLogo.style.display='block'; }
+          document.documentElement.style.setProperty('--watermark-url', 'url("' + path + '")');
+        };
+        img.onerror = tryNext;
+        img.src = path;
+      }
+      tryNext();
+    })();
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a.navlink').forEach(a=>{
+      a.addEventListener('click', (ev)=>{
+        const href = a.getAttribute('href');
+        if(href && href.startsWith('#')){
+          const target = document.querySelector(href);
+          if(target){
+            ev.preventDefault();
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+          }
+        }
+      });
+    });
+
+    // Accessibility: focus visible outline for keyboard users
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Tab') document.body.classList.add('show-focus');
+    });
+  </script>
+
+</body>
+</html>
