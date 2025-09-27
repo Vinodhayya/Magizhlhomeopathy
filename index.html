@@ -125,32 +125,27 @@
     .address{color:var(--muted);font-size:14px}
     .phone{font-weight:700;color:var(--green-800);font-size:16px}
 	  
+/* === Responsive slider with stable aspect ratio === */
 .slider-wrapper {
-  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 9;          /* keeps same shape everywhere */
   overflow: hidden;
   border-radius: var(--radius);
   box-shadow: 0 8px 24px rgba(39,104,79,0.08);
-  background:#fff;
-  height:280px;                     /* your desired height */
-}
-.slider {
-  display: flex;
-  width: 300%;                      /* 3 slides side-by-side */
-  animation: slide 9s infinite;     /* 3 s per image */
-}
-.slider img {
-  width: 30%;
-  height: 60%;
-  object-fit: contain;              /* fit whole image */
-  flex-shrink: 0;
+  position: relative;
 }
 
-/* move one full-width image at a time */
-@keyframes slide {
-  0%   {transform: translateX(0);}
-  33.333% {transform: translateX(-30%);}
-  66.666% {transform: translateX(-60%);}
-  100% {transform: translateX(0);}
+.slider {
+  display: flex;
+  width: 300%;                   /* 3 slides side-by-side */
+  animation: slide 9s infinite;  /* 3 s per image */
+}
+
+.slider img {
+  width: 40%;
+  height: 40%;
+  flex-shrink: 0;
+  object-fit: cover;             /* fill without distortion */
 }
 
     /* Modal */
