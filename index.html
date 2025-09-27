@@ -163,6 +163,11 @@
     /* Chat float */
     #chatbot-btn{position:fixed;bottom:20px;right:20px;background:var(--green-600);color:#fff;border:none;border-radius:50%;width:65px;height:65px;cursor:pointer;font-size:26px;box-shadow:0 6px 12px rgba(0,0,0,0.2);z-index:10001}
     #chatPanel{display:none;position:fixed;bottom:90px;right:20px;width:320px;max-height:480px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,0.2);overflow:hidden;z-index:10001}
+	
+	@keyframes spin {
+		from { transform: rotate(0deg); }
+		to { transform: rotate(360deg); }
+	}
 
     @media (max-width:980px){
       .hero{grid-template-columns:1fr;padding-bottom:8px}
@@ -183,6 +188,13 @@
     .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:rgba(59,138,104,0.06);font-weight:600;color:var(--green-800)}
     .small{font-size:13px}
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("uscyLX5GABFCW5C4A");
+  })();
+</script>
+
 </head>
 <body>
 
@@ -377,32 +389,32 @@
       </div>
 
           <!-- Mentions Dr. Lavanya -->
-<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
-  <p class="muted" style="font-style:italic">“Dr. Lavanya is very kind and patient. She listened carefully and gave me medicines that worked within weeks.”</p>
-  <div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Geetha M.</div>
-</div>
-
-<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
-  <p class="muted" style="font-style:italic">“I consulted Dr. Lavanya for my arthritis pain. With her treatment, my mobility has improved so much. Very grateful.”</p>
-  <div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Senthil K.</div>
-</div>
-
-<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
-  <p class="muted" style="font-style:italic">“Dr. Lavanya explained everything clearly and gave safe medicines for my daughter. We saw results without side effects.”</p>
-  <div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Karthika S.</div>
-</div>
-
-<!-- General feedback -->
-<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
-  <p class="muted" style="font-style:italic">“The clinic is very professional. Online booking and delivery made my experience hassle-free.”</p>
-  <div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Aravind N.</div>
-</div>
-
-<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
-  <p class="muted" style="font-style:italic">“Excellent care and timely follow-up. I feel much better after starting treatment here.”</p>
-  <div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Shalini P.</div>
-</div>
-    </div>
+	<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
+	<p class="muted" style="font-style:italic">“Dr. Lavanya is very kind and patient. She listened carefully and gave me medicines that worked within weeks.”</p>
+	<div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Geetha M.</div>
+	</div>
+	
+	<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
+	<p class="muted" style="font-style:italic">“I consulted Dr. Lavanya for my arthritis pain. With her treatment, my mobility has improved so much. Very grateful.”</p>
+	<div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Senthil K.</div>
+	</div>
+	
+	<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
+	<p class="muted" style="font-style:italic">“Dr. Lavanya explained everything clearly and gave safe medicines for my daughter. We saw results without side effects.”</p>
+	<div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Karthika S.</div>
+	</div>
+	
+	<!-- General feedback -->
+	<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
+	<p class="muted" style="font-style:italic">“The clinic is very professional. Online booking and delivery made my experience hassle-free.”</p>
+	<div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Aravind N.</div>
+	</div>
+	
+	<div class="testimonial-card" style="min-width:100%; background:var(--card-bg); padding:24px; border-radius:var(--radius); box-shadow:0 6px 18px rgba(39,104,79,0.04);">
+	<p class="muted" style="font-style:italic">“Excellent care and timely follow-up. I feel much better after starting treatment here.”</p>
+	<div style="margin-top:12px; font-weight:600; color:var(--green-800);">— Shalini P.</div>
+	</div>
+	</div>
     <!-- Arrows -->
     <button id="prevBtn" style="position:absolute; top:50%; left:-10px; transform:translateY(-50%); background:var(--green-600); color:white; border:none; padding:8px 12px; border-radius:50%; cursor:pointer;">❮</button>
     <button id="nextBtn" style="position:absolute; top:50%; right:-10px; transform:translateY(-50%); background:var(--green-600); color:white; border:none; padding:8px 12px; border-radius:50%; cursor:pointer;">❯</button>
@@ -524,6 +536,12 @@
         <label for="email">Email address</label>
         <input id="email" name="email" type="email" placeholder="you@example.com" required>
       </div>
+	  
+	  <div class="field">
+		<label for="mobile">Mobile number</label>
+		<input id="mobile" name="mobile" type="text" placeholder="Your mobile number" required>
+	 </div>
+
 
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <div style="flex:1" class="field">
@@ -553,6 +571,12 @@
         <label for="chatEmail">Your email</label>
         <input id="chatEmail" name="chatEmail" type="email" placeholder="you@example.com" required>
       </div>
+	  
+	  <div class="field">
+		<label for="chatMobile">Mobile number (optional)</label>
+		<input id="chatMobile" name="chatMobile" type="text" placeholder="Your mobile number">
+	  </div>
+
 
       <div class="field">
         <label for="chatMessage">Message</label>
@@ -565,80 +589,127 @@
       </div>
     </form>
   </div>
+  
+	<div id="sendingOverlay" style="
+	display:none;
+	position:fixed;
+	top:0;left:0;right:0;bottom:0;
+	background:rgba(0,0,0,0.5);
+	color:#fff;
+	font-size:18px;
+	flex-direction:column;
+	align-items:center;
+	justify-content:center;
+	z-index:20000;">
+	
+	<div class="spinner" style="
+		border: 4px solid rgba(255,255,255,0.3);
+		border-top: 4px solid #fff;
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		animation: spin 1s linear infinite;
+		margin-bottom:12px;">
+	</div>
+	
+	Sending, please wait...
+	</div>
+
 
   <script>
     /************************************************************************
      * Replace the clinicEmail below with your real clinic email address.
      * Example: const clinicEmail = 'appointments@magizhl.com'
      ************************************************************************/
-    const clinicEmail = 'puvi3745@gmail.com'; // <-- change to your clinic email
+	
+	function showSendingOverlay(){
+	document.getElementById('sendingOverlay').style.display = 'flex';
+	}
+	function hideSendingOverlay(){
+	document.getElementById('sendingOverlay').style.display = 'none';
+	}
 
-    // Utility: build mailto URL
-    function mailtoUrl(to, subject, body){
-      return 'mailto:' + encodeURIComponent(to)
-             + '?subject=' + encodeURIComponent(subject || '')
-             + '&body=' + encodeURIComponent(body || '');
-    }
-
-    // Original handlers (kept behavior)
-    function handleAppointment(e){
-      e.preventDefault();
-      const form = e.target;
-      // Works both for original form or cloned form because we use named controls
-      const name = (form.elements['name'] && form.elements['name'].value || '').trim();
-      const email = (form.elements['email'] && form.elements['email'].value || '').trim();
-      const date = (form.elements['date'] && form.elements['date'].value) || '';
-      const time = (form.elements['time'] && form.elements['time'].value) || 'Any';
-      const message = (form.elements['message'] && form.elements['message'].value.trim()) || 'No additional details';
-
-      if(!name || !email || !date){
-        alert('Please fill your name, email and preferred date.');
-        return false;
-      }
-
-      const subject = `Appointment request — ${name} (${date})`;
-      const body = [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Preferred date: ${date}`,
-        `Preferred time: ${time}`,
-        'Message:',
-        message,
-        '',
-        'Source: Website appointment form'
-      ].join('\\n');
-
-      // open mail client
-      window.location.href = mailtoUrl(clinicEmail, subject, body);
-      closeModal();
-      return false;
-    }
-
-    function handleChat(e){
-      e.preventDefault();
-      const form = e.target;
-      const email = (form.elements['chatEmail'] && form.elements['chatEmail'].value || '').trim();
-      const message = (form.elements['chatMessage'] && form.elements['chatMessage'].value.trim()) || '';
-
-      if(!email || !message){
-        alert('Please provide your email and message so we can contact you back.');
-        return false;
-      }
-
-      const subject = `Website chat message from ${email}`;
-      const body = [
-        `Email: ${email}`,
-        '',
-        'Message:',
-        message,
-        '',
-        'Source: Website chat form'
-      ].join('\\n');
-
-      window.location.href = mailtoUrl(clinicEmail, subject, body);
-      hideChat();
-      return false;
-    }
+	function handleAppointment(e){
+	e.preventDefault();
+	const form = e.target;
+	const submitBtn = form.querySelector('button[type="submit"]');
+	if(submitBtn) submitBtn.disabled = true;
+	
+	closeModal();           // close immediately
+	showSendingOverlay();   // show spinner
+	
+	const name = form.elements['name']?.value.trim();
+	const email = form.elements['email']?.value.trim();
+	const mobile = form.elements['mobile']?.value.trim();
+	const date = form.elements['date']?.value;
+	const time = form.elements['time']?.value || 'Any';
+	const message = form.elements['message']?.value.trim() || 'No additional details';
+	
+	if(!name || !email || !mobile || !date){
+		alert('Please fill your name, email, mobile, and preferred date.');
+		if(submitBtn) submitBtn.disabled = false;
+		hideSendingOverlay();
+		return false;
+	}
+	
+	emailjs.send("service_vb93qmq","template_locvfon",{
+		name,
+		email,
+		mobile,
+		date,
+		time,
+		message
+	}).then(()=>{
+		alert("Appointment request sent successfully!");
+		form.reset();
+	}).catch(err=>{
+		console.error(err);
+		alert("Failed to send appointment request. Please try again.");
+	}).finally(()=>{
+		if(submitBtn) submitBtn.disabled = false;
+		hideSendingOverlay();
+	});
+	
+	return false;
+	}
+	
+	function handleChat(e){
+	e.preventDefault();
+	const form = e.target;
+	const submitBtn = form.querySelector('button[type="submit"]');
+	if(submitBtn) submitBtn.disabled = true;
+	
+	hideChat();             // close immediately
+	showSendingOverlay();   // show spinner
+	
+	const email = form.elements['chatEmail']?.value.trim();
+	const mobile = form.elements['chatMobile']?.value.trim() || 'Not provided';
+	const message = form.elements['chatMessage']?.value.trim();
+	
+	if(!email || !message){
+		alert('Please provide your email and message.');
+		if(submitBtn) submitBtn.disabled = false;
+		hideSendingOverlay();
+		return false;
+	}
+	
+	emailjs.send("service_vb93qmq","template_5q4tlwc",{
+		email,
+		mobile,
+		message
+	}).then(()=>{
+		alert("Message sent successfully!");
+		form.reset();
+	}).catch(err=>{
+		console.error(err);
+		alert("Failed to send message. Please try again.");
+	}).finally(()=>{
+		if(submitBtn) submitBtn.disabled = false;
+		hideSendingOverlay();
+	});
+	
+	return false;
+	}
 
     // sample fill for demo
     function fillSample(){
