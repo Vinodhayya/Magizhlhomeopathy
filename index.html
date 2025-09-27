@@ -539,7 +539,7 @@
 	  
 	  <div class="field">
 		<label for="mobile">Mobile number</label>
-		<input id="mobile" name="mobile" type="text" placeholder="Your mobile number" required>
+		<input id="mobile" name="mobile" type="tel" placeholder="Your mobile number" required>
 	 </div>
 
 
@@ -574,7 +574,7 @@
 	  
 	  <div class="field">
 		<label for="chatMobile">Mobile number (optional)</label>
-		<input id="chatMobile" name="chatMobile" type="text" placeholder="Your mobile number">
+		<input id="chatMobile" name="chatMobile" type="tel" placeholder="Your mobile number">
 	  </div>
 
 
@@ -635,8 +635,8 @@
 	const submitBtn = form.querySelector('button[type="submit"]');
 	if(submitBtn) submitBtn.disabled = true;
 	
-	closeModal();           // close immediately
-	showSendingOverlay();   // show spinner
+	closeModal();
+	showSendingOverlay();
 	
 	const name = form.elements['name']?.value.trim();
 	const email = form.elements['email']?.value.trim();
@@ -645,8 +645,23 @@
 	const time = form.elements['time']?.value || 'Any';
 	const message = form.elements['message']?.value.trim() || 'No additional details';
 	
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	const mobileRegex = /^(\+91)?\d{10}$/;
+	
 	if(!name || !email || !mobile || !date){
 		alert('Please fill your name, email, mobile, and preferred date.');
+		if(submitBtn) submitBtn.disabled = false;
+		hideSendingOverlay();
+		return false;
+	}
+	if(!emailRegex.test(email)){
+		alert('Please enter a valid email address.');
+		if(submitBtn) submitBtn.disabled = false;
+		hideSendingOverlay();
+		return false;
+	}
+	if(!mobileRegex.test(mobile)){
+		alert('Please enter a valid 10-digit mobile number (with or without +91).');
 		if(submitBtn) submitBtn.disabled = false;
 		hideSendingOverlay();
 		return false;
@@ -679,12 +694,15 @@
 	const submitBtn = form.querySelector('button[type="submit"]');
 	if(submitBtn) submitBtn.disabled = true;
 	
-	hideChat();             // close immediately
-	showSendingOverlay();   // show spinner
+	hideChat();
+	showSendingOverlay();
 	
 	const email = form.elements['chatEmail']?.value.trim();
-	const mobile = form.elements['chatMobile']?.value.trim() || 'Not provided';
+	const mobile = form.elements['chatMobile']?.value.trim();
 	const message = form.elements['chatMessage']?.value.trim();
+	
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	const mobileRegex = /^(\+91)?\d{10}$/;
 	
 	if(!email || !message){
 		alert('Please provide your email and message.');
@@ -692,10 +710,22 @@
 		hideSendingOverlay();
 		return false;
 	}
+	if(!emailRegex.test(email)){
+		alert('Please enter a valid email address.');
+		if(submitBtn) submitBtn.disabled = false;
+		hideSendingOverlay();
+		return false;
+	}
+	if(mobile && !mobileRegex.test(mobile)){
+		alert('Please enter a valid 10-digit mobile number (with or without +91), or leave blank.');
+		if(submitBtn) submitBtn.disabled = false;
+		hideSendingOverlay();
+		return false;
+	}
 	
 	emailjs.send("service_vb93qmq","template_5q4tlwc",{
 		email,
-		mobile,
+		mobile: mobile || 'Not provided',
 		message
 	}).then(()=>{
 		alert("Message sent successfully!");
